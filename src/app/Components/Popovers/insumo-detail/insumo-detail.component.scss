@@ -1,0 +1,23 @@
+.titleRow{
+    border-bottom: solid 1px lightgray;
+}
+.titleItem{
+    font-weight: bold;
+}
+.titleItem2{
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+.item2{
+    display: flex;
+    justify-content: center;
+}
+.buttonRow{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+.editButton{
+    font-size: 13px;
+}

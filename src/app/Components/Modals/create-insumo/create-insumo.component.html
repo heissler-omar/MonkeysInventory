@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="title">
+      Crear Insumo
+    </ion-title>
+    <ion-icon name="close-circle-outline" slot="end" class="closeIcon" (click)="dismissModal()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-grid class="formGrid">
+      <ion-row class="formRow">
+        <ion-col class="inputTitle">
+          Nombre:
+        </ion-col>
+        <ion-col>
+          <input type="text" class="input">
+        </ion-col>
+      </ion-row>
+      <ion-row class="formRow">
+        <ion-col class="inputTitle">
+          Cantidad existente:
+        </ion-col>
+        <ion-col>
+          <input type="number" class="input">
+        </ion-col>
+      </ion-row>
+      <ion-row class="formRow">
+        <ion-col class="inputTitle">
+          Unidad de medida:
+        </ion-col>
+        <ion-col>
+          <input type="text" class="input">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>
