@@ -1,0 +1,77 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="title">
+      Crear Producto
+    </ion-title>
+    <ion-icon name="close-circle-outline" slot="end" class="closeIcon" (click)="dismissModal()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card class="card">
+    <ion-grid class="formGrid">
+
+      <ion-row>
+        <ion-col class="cameraCol">
+          <div class="cameraDiv">
+            <ion-icon name="camera-outline" class="cameraIcon"></ion-icon>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="formRow">
+        <ion-col class="inputTitle">
+          Nombre:
+        </ion-col>
+        <ion-col size="7.1" class="colInput">
+          <input type="text" class="input">
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="formRow">
+        <ion-col class="inputTitle">
+          Insumos:
+        </ion-col>
+        <ion-col size="7.1">
+
+          <ng-multiselect-dropdown
+            [placeholder]="'Seleccionar insumos'"
+            [settings]="dropdownSettings"
+            [data]="dropdownList"
+            (onSelect)="onItemSelect($event)"
+            (onDeSelect)="onItemDeSelect($event)"
+            class="multiselect"
+          >
+          </ng-multiselect-dropdown>
+        
+        
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="formRow">
+        <ion-col class="inputTitle2" size="12">
+          Configuración de insumos
+        </ion-col>
+      </ion-row>
+      <ion-row>Especificar la cantidad:</ion-row>
+
+      <ion-row class="insumoRow" *ngFor="let item of selectedInsumos">
+        <ion-col size="4">
+          <input type="text" class="inputInsumo" readonly value="{{item.name}}">
+        </ion-col>
+        <ion-col size="4">
+          <input type="number" placeholder="cantidad" class="inputQuantity">
+        </ion-col>
+        <ion-col size="4">
+          <input type="text" class="inputInsumo" readonly>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="buttonRow">
+        <ion-button class="saveButton">Guardar</ion-button>
+      </ion-row>
+
+    </ion-grid>
+  </ion-card>
+</ion-content>
+

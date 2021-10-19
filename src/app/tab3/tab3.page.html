@@ -7,11 +7,18 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card class="ion-activatable ripple-parent" (click)="presentModal($event)">
+    <ion-ripple-effect></ion-ripple-effect>
+    <ion-card-content>
+      <ion-row>
+        <ion-col size="3">
+          <ion-icon name="create-outline" class="createIcon"></ion-icon>
+        </ion-col>
+        <ion-col class="descriptionCol">
+          Crear producto
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
 </ion-content>
