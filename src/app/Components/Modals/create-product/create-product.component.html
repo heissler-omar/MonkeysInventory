@@ -11,7 +11,7 @@
   <ion-card class="card">
     <ion-grid class="formGrid">
 
-      <ion-row>
+      <ion-row class="cameraRow">
         <ion-col class="cameraCol">
           <div class="cameraDiv">
             <ion-icon name="camera-outline" class="cameraIcon"></ion-icon>
@@ -23,8 +23,20 @@
         <ion-col class="inputTitle">
           Nombre:
         </ion-col>
-        <ion-col size="7.1" class="colInput">
+        <ion-col size="9" class="colInput">
           <input type="text" class="input">
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="formRow">
+        <ion-col class="inputTitle">
+          Categoría:
+        </ion-col>
+        <ion-col size="9" class="colInput">
+          <select name="cars" id="cars" class="selectOption">
+            <option value="volvo">Bebida</option>
+            <option value="saab">Comida</option>
+          </select>
         </ion-col>
       </ion-row>
 
@@ -32,7 +44,7 @@
         <ion-col class="inputTitle">
           Insumos:
         </ion-col>
-        <ion-col size="7.1">
+        <ion-col size="9">
 
           <ng-multiselect-dropdown
             [placeholder]="'Seleccionar insumos'"
@@ -44,25 +56,28 @@
           >
           </ng-multiselect-dropdown>
         
-        
         </ion-col>
       </ion-row>
 
       <ion-row class="formRow">
-        <ion-col class="inputTitle2" size="12">
+        <ion-col class="inputTitle2" size="12" *ngIf="selectedInsumos.length != 0">
           Configuración de insumos
         </ion-col>
       </ion-row>
-      <ion-row>Especificar la cantidad:</ion-row>
+      <ion-row *ngIf="selectedInsumos.length != 0">
+        <ion-col>
+          Ingresar la cantidad:
+        </ion-col>
+      </ion-row>
 
       <ion-row class="insumoRow" *ngFor="let item of selectedInsumos">
-        <ion-col size="4">
+        <ion-col>
           <input type="text" class="inputInsumo" readonly value="{{item.name}}">
         </ion-col>
-        <ion-col size="4">
+        <ion-col>
           <input type="number" placeholder="cantidad" class="inputQuantity">
         </ion-col>
-        <ion-col size="4">
+        <ion-col>
           <input type="text" class="inputInsumo" readonly>
         </ion-col>
       </ion-row>

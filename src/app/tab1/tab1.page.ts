@@ -4,6 +4,8 @@ import { CreateInsumoComponent } from '../Components/Modals/create-insumo/create
 import { PopoverController } from '@ionic/angular';
 import { InsumoDetailComponent } from '../Components/Popovers/insumo-detail/insumo-detail.component';
 import { InsumosTableComponent } from '../Components/Modals/insumos-table/insumos-table.component';
+import { AlertController } from '@ionic/angular';
+import { DetailInsumoComponent } from '../Components/Modals/detail-insumo/detail-insumo.component';
 
 @Component({
   selector: 'app-tab1',
@@ -12,7 +14,9 @@ import { InsumosTableComponent } from '../Components/Modals/insumos-table/insumo
 })
 export class Tab1Page {
 
-  constructor(public modalController: ModalController, public popoverController: PopoverController) {}
+  constructor(public modalController: ModalController, 
+              public popoverController: PopoverController,
+              public alertController: AlertController) {}
 
   async presentModal() {
     const modal = await this.modalController.create({
@@ -29,6 +33,14 @@ export class Tab1Page {
     });
     return await modal.present();
   }
+
+  async presentModalDetailInsumo() {
+    const modal = await this.modalController.create({
+      component: DetailInsumoComponent,
+      cssClass: 'modalDetailInsumo'
+    });
+    return await modal.present();
+  }
   
   async presentPopover(ev: any) {
     const popover = await this.popoverController.create({
@@ -42,5 +54,33 @@ export class Tab1Page {
     const { role } = await popover.onDidDismiss();
     console.log('onDidDismiss resolved with role', role);
   }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Descargar Excel',
+      message: '¿Deseas exportar el inventario de insumos en formato Excel?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Aceptar',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  
+
 
 }

@@ -23,58 +23,58 @@
 
   <ion-card>
     <ion-item lines="none">
-      <ion-label class="listTitle">Lista de insumos</ion-label>
-      <ion-icon name="download-outline"></ion-icon>
+      <ion-label class="listTitle">Inventario de Insumos</ion-label>
+      <ion-icon name="eye-outline" class="productsIcon" (click)="presentModalTable($event)"></ion-icon>&nbsp;&nbsp;
+      <ion-icon name="download-outline" class="productsIcon" (click)="presentAlert()"></ion-icon>
     </ion-item>
-  
-    <ion-row class="viewTableRow">
-      <ion-button color="medium" class="viewTableButton" (click)="presentModalTable($event)">Ver en tabla</ion-button>
-    </ion-row>
   
     <ion-searchbar placeholder="Buscar"></ion-searchbar>
 
-    <ion-item class="ion-activated" (click)="presentPopover($event)">
-      <ion-icon name="list-circle-outline" slot="start"></ion-icon>
-      <ion-label>Café</ion-label>
-      <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-    </ion-item>
-
-    <ion-item class="ion-activated" (click)="presentPopover($event)">
-      <ion-icon name="list-circle-outline" slot="start"></ion-icon>
-      <ion-label>Café</ion-label>
-      <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-    </ion-item>
-
-    <ion-item class="ion-activated" (click)="presentPopover($event)">
-      <ion-icon name="list-circle-outline" slot="start"></ion-icon>
-      <ion-label>Café</ion-label>
-      <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-    </ion-item>
-
-    <ion-item class="ion-activated" (click)="presentPopover($event)">
-      <ion-icon name="list-circle-outline" slot="start"></ion-icon>
-      <ion-label>Café</ion-label>
-      <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-    </ion-item>
-
-    <ion-item class="ion-activated" (click)="presentPopover($event)">
-      <ion-icon name="list-circle-outline" slot="start"></ion-icon>
-      <ion-label>Café</ion-label>
-      <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-    </ion-item>
-
-    <ion-item class="ion-activated" (click)="presentPopover($event)">
-      <ion-icon name="list-circle-outline" slot="start"></ion-icon>
-      <ion-label>Café</ion-label>
-      <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-    </ion-item>
-
-    <ion-item class="ion-activated" (click)="presentPopover($event)">
-      <ion-icon name="list-circle-outline" slot="start"></ion-icon>
-      <ion-label>Café</ion-label>
-      <ion-icon name="ellipsis-vertical-outline"></ion-icon>
-    </ion-item>
+    <ion-list>
+      <ion-item class="ion-activated" (click)="presentModalDetailInsumo($event)">
+        <ion-icon name="list-circle-outline" slot="start"></ion-icon>
+        <ion-label>Café</ion-label>
+        <ion-label slot="end">50</ion-label>
+        <ion-label slot="end">Libras</ion-label>
+        <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
+      </ion-item>
   
-    
+      <ion-item class="ion-activated" (click)="presentPopover($event)">
+        <ion-icon name="list-circle-outline" slot="start"></ion-icon>
+        <ion-label>Café</ion-label>
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+      </ion-item>
+  
+      <ion-item class="ion-activated" (click)="presentPopover($event)">
+        <ion-icon name="list-circle-outline" slot="start"></ion-icon>
+        <ion-label>Café</ion-label>
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+      </ion-item>
+  
+      <ion-item class="ion-activated" (click)="presentPopover($event)">
+        <ion-icon name="list-circle-outline" slot="start"></ion-icon>
+        <ion-label>Café</ion-label>
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+      </ion-item>
+  
+      <ion-item class="ion-activated" (click)="presentPopover($event)">
+        <ion-icon name="list-circle-outline" slot="start"></ion-icon>
+        <ion-label>Café</ion-label>
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+      </ion-item>
+  
+      <ion-item class="ion-activated" (click)="presentPopover($event)">
+        <ion-icon name="list-circle-outline" slot="start"></ion-icon>
+        <ion-label>Café</ion-label>
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+      </ion-item>
+  
+      <ion-item class="ion-activated" (click)="presentPopover($event)">
+        <ion-icon name="list-circle-outline" slot="start"></ion-icon>
+        <ion-label>Café</ion-label>
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+      </ion-item>
+    </ion-list>
+
   </ion-card>
 </ion-content>

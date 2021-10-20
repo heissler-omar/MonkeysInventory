@@ -9,4 +9,8 @@ export class Tab2Page {
 
   constructor() {}
 
+  print(){
+    console.log('Any text');
+  }
+
 }

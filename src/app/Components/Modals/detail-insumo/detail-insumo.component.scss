@@ -1,0 +1,25 @@
+.grid{
+    --ion-grid-padding: 2px;
+    margin: 0px;
+}
+.titleRow{
+    margin-bottom: 10px;
+}
+.title{
+    font-size: 20px;
+}
+.itemRow{
+    border-bottom: solid 1px lightgray;
+}
+.editButton{
+    text-transform: none;
+}
+.buttonRow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+.closeIcon{
+    font-size: 25px;
+}

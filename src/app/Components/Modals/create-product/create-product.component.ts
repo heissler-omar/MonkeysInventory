@@ -45,6 +45,8 @@ export class CreateProductComponent implements OnInit {
       maxHeight: 200,
       searchPlaceholderText: 'Buscar'
     };
+
+    console.log(this.selectedInsumos)
   }
 
   onItemSelect(item: any) {

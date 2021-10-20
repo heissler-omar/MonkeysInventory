@@ -18,8 +18,7 @@
     margin-bottom: 15px;
 }
 .formRow{
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding: 0px;
 }
 .colInput{
     display: flex;
@@ -27,22 +26,34 @@
 }
 .input{
     height: 30px;
+    width: 100%;
+    border-color: gray;
+    border-style: solid;
+  border-width: 1px;
+}
+.selectOption{
+    height: 30px;
+    width: 100%;
+    border-color: gray;
 }
 .selectInsumo{
     height: 30px;
     width: 100%;
 }
 .card{
-    height: 100%;
+    min-height: 100%;
 }
 .cameraDiv{
     border-radius: 10px;
-    width: 190px;
-    height: 190px;
+    width: 180px;
+    height: 180px;
     background-color: lightgray;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.cameraRow{
+    margin-bottom: 15px;
 }
 .cameraCol{
     display: flex;
@@ -60,6 +71,7 @@
 }
 .inputQuantity{
     width: 100%;
+    height: 20px;
     border: none;
 }
 .insumoRow{
