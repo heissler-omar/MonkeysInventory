@@ -10,4 +10,21 @@
 .ripple-parent {
     position: relative;
     overflow: hidden;
-  }
+}
+.salesCard{
+    height: 60%;
+}
+.buttonsRow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.categoryButton{
+    text-transform: none;
+    color: gray;
+}
+.listDiv{
+    height: 300px; 
+    overflow-y: auto;
+    padding: 0 0 20px 0;
+}

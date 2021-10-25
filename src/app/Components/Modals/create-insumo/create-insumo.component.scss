@@ -18,3 +18,12 @@
 .input{
     height: 30px;
 }
+.buttonRow{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+.saveButton{
+    text-transform: none;
+}

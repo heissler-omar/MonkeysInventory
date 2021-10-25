@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title class="title">
+      Historial de Ventas
+    </ion-title>
+    <ion-icon name="close-circle-outline" slot="end" class="closeIcon" (click)="dismissModal()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-row>
+    <ion-col class="buttonCol">
+      <ion-button color="none" class="exportButton" (click)="presentAlertConfirm()">
+        Exportar historial
+        <ion-icon name="download-outline" slot="end"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  <table>
+    <tr>
+      <th>Fecha</th>
+      <th>Producto</th>
+      <th>Cantidad</th>
+      <th>Precio</th>
+    </tr>
+    <tr>
+      <td>{{date}}</td>
+      <td>Latte y Capu Saborizado</td>
+      <td>3</td>
+      <td>Q&nbsp;72.00</td>
+    </tr>
+    <tr>
+      <td>{{date}}</td>
+      <td>Capuccino</td>
+      <td>2</td>
+      <td>Q&nbsp;36.00</td>
+    </tr>
+    <tr>
+      <td>{{date}}</td>
+      <td>Latte</td>
+      <td>1</td>
+      <td>Q&nbsp;18.00</td>
+    </tr>
+  </table>
+</ion-content>

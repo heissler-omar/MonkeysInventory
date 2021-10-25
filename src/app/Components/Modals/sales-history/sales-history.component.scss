@@ -1,0 +1,26 @@
+.closeIcon{
+    font-size: 30px;
+    margin-right: 15px;
+    color: rgb(179, 0, 0);
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+.exportButton{
+    text-transform: none;
+    color: gray;
+}
+.buttonCol{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

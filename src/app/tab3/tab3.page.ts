@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { CreateProductComponent } from '../Components/Modals/create-product/create-product.component';
 import { ProductsTableComponent } from '../Components/Modals/products-table/products-table.component';
 import { AlertController } from '@ionic/angular';
+import { ProductDetailComponent } from '../Components/Modals/product-detail/product-detail.component';
 
 @Component({
   selector: 'app-tab3',
@@ -29,6 +30,14 @@ export class Tab3Page implements OnInit {
     const modal = await this.modalController.create({
       component: ProductsTableComponent,
       cssClass: 'my-custom-class'
+    });
+    return await modal.present();
+  }
+
+  async presentModalProductDetail() {
+    const modal = await this.modalController.create({
+      component: ProductDetailComponent,
+      cssClass: 'productDetailModal'
     });
     return await modal.present();
   }

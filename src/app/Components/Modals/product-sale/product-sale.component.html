@@ -1,0 +1,38 @@
+<ion-grid class="grid">
+<ion-row class="closeIconRow">
+  <ion-icon name="close-circle-outline" class="closeIcon" (click)="dismissModal()"></ion-icon>
+</ion-row>
+  <ion-row>
+    <ion-col class="title">
+      Latte y Capu Saborizado
+    </ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>Categoría:</ion-col>
+    <ion-col>Bebida</ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>Cantidad a vender:</ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col class="buttonsCol">
+      <ion-button color="danger" (click)="substraction()">
+        <ion-icon slot="icon-only" name="remove"></ion-icon>
+      </ion-button>
+      <ion-button color="none" class="number">
+        {{number}}
+      </ion-button>
+      <ion-button (click)="addition()">
+        <ion-icon slot="icon-only" name="add"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+   <ion-col class="sellCol">
+    <ion-button color="success" (click)="presentAlertConfirm()">Vender</ion-button>
+   </ion-col> 
+  </ion-row>
+</ion-grid>

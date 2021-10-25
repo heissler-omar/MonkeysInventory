@@ -1,0 +1,38 @@
+.grid{
+    margin: 0;
+    height: 100%;
+    overflow-y: auto;
+}
+.closeIconRow{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.closeIcon{
+    font-size: 30px;
+    color: #b30000;
+}
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    font-size: 20px;
+    margin-bottom: 5%;
+}
+.itemRow{
+    border-bottom: solid 1px gray;
+}
+.itemTitle{
+    text-align: end;
+    margin-right: 20%;
+}
+.buttonsCol{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button{
+    text-transform: none;
+}

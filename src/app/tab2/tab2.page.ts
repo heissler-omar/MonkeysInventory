@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { ProductSaleComponent } from '../Components/Modals/product-sale/product-sale.component';
+import { SalesHistoryComponent } from '../Components/Modals/sales-history/sales-history.component';
+
 
 @Component({
   selector: 'app-tab2',
@@ -7,10 +11,21 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  constructor(public modalController: ModalController) {}
 
-  print(){
-    console.log('Any text');
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: SalesHistoryComponent,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
+  }
+  async presentModalProductSale() {
+    const modal = await this.modalController.create({
+      component: ProductSaleComponent,
+      cssClass: 'productSaleModal'
+    });
+    return await modal.present();
   }
 
 }

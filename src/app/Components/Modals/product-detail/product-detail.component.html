@@ -1,0 +1,34 @@
+<ion-grid class="grid">
+  <ion-row class="closeIconRow">
+    <ion-icon name="close-circle-outline" class="closeIcon" (click)="dismissModal()"></ion-icon>
+  </ion-row>
+
+  <ion-row>
+    <ion-col class="title">
+      Latte y Capu Saborizado
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="itemRow">
+    <ion-col class="itemTitle">Categoría:</ion-col>
+    <ion-col>Bebida</ion-col>
+  </ion-row>
+
+  <ion-row class="itemRow">
+    <ion-col class="itemTitle">Precio:</ion-col>
+    <ion-col>Bebida</ion-col>
+  </ion-row>
+
+  <ion-row class="itemRow">
+    <ion-col class="itemTitle">Insumos:</ion-col>
+    <ion-col>Café <br> Azucar <br> Leche</ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col class="buttonsCol">
+      <ion-button color="danger" class="button" (click)="presentAlertConfirm()">Eliminar</ion-button>&nbsp;
+      <ion-button class="button" (click)="presentModalEditProduct()">Editar</ion-button>
+    </ion-col>
+  </ion-row>
+
+</ion-grid>

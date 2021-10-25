@@ -19,15 +19,13 @@ export class CreateProductComponent implements OnInit {
 
   ngOnInit() {
     this.dropdownList = [
-      { item_id: 1, item_text: 'Mumbai' },
-      { item_id: 2, item_text: 'Bangaluru' },
-      { item_id: 3, item_text: 'Pune' },
-      { item_id: 4, item_text: 'Navsari' },
-      { item_id: 6, item_text: 'New 6' },
-      { item_id: 7, item_text: 'New 7' },
-      { item_id: 8, item_text: 'New 8' },
-      { item_id: 9, item_text: 'New 9' },
-      { item_id: 10, item_text: 'New 10' }
+      { item_id: 1, item_text: 'Café' },
+      { item_id: 2, item_text: 'Leche' },
+      { item_id: 3, item_text: 'Leche espumada' },
+      { item_id: 4, item_text: 'Espresso' },
+      { item_id: 6, item_text: 'Chai' },
+      { item_id: 7, item_text: 'Azucar' },
+      { item_id: 8, item_text: 'Jarabe' }
     ];
     // this.selectedItems = [
     //   { item_id: 3, item_text: 'Pune' },

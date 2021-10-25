@@ -11,13 +11,13 @@
   <ion-card class="card">
     <ion-grid class="formGrid">
 
-      <ion-row class="cameraRow">
+      <!-- <ion-row class="cameraRow">
         <ion-col class="cameraCol">
           <div class="cameraDiv">
             <ion-icon name="camera-outline" class="cameraIcon"></ion-icon>
           </div>
         </ion-col>
-      </ion-row>
+      </ion-row> -->
 
       <ion-row class="formRow">
         <ion-col class="inputTitle">
@@ -37,6 +37,15 @@
             <option value="volvo">Bebida</option>
             <option value="saab">Comida</option>
           </select>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="formRow">
+        <ion-col class="inputTitle">
+          Precio:
+        </ion-col>
+        <ion-col size="9" class="colInput">
+          <input type="number" class="input">
         </ion-col>
       </ion-row>
 
@@ -78,7 +87,7 @@
           <input type="number" placeholder="cantidad" class="inputQuantity">
         </ion-col>
         <ion-col>
-          <input type="text" class="inputInsumo" readonly>
+          <input type="text" class="inputInsumo" readonly value="Libras">
         </ion-col>
       </ion-row>
 

@@ -1,13 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { IonicModule } from '@ionic/angular';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
 import { CreateInsumoComponent } from './Modals/create-insumo/create-insumo.component';
 import { CreateProductComponent } from './Modals/create-product/create-product.component';
 import { EditInsumoComponent } from './Modals/edit-insumo/edit-insumo.component';
 import { InsumosTableComponent } from './Modals/insumos-table/insumos-table.component';
 import { InsumoDetailComponent } from './Popovers/insumo-detail/insumo-detail.component';
-import { IonicModule } from '@ionic/angular';
-import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { EditProductComponent } from './Modals/edit-product/edit-product.component';
+
+
 
 
 @NgModule({
@@ -16,7 +20,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     CreateProductComponent,
     EditInsumoComponent,
     InsumosTableComponent,
-    InsumoDetailComponent
+    InsumoDetailComponent,
+    EditProductComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +33,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     CreateProductComponent,
     EditInsumoComponent,
     InsumosTableComponent,
-    InsumoDetailComponent
+    InsumoDetailComponent,
+    EditProductComponent
   ]
 })
 export class ComponentsModule { }
