@@ -15,12 +15,12 @@
       <th>Cantidad</th>
       <th>Unidad de medida</th>
     </tr>
-    <tr>
-      <td>Café</td>
-      <td>50</td>
-      <td>Libras</td>
+    <tr *ngFor="let insumo of insumos">
+      <td>{{insumo.name}}</td>
+      <td>{{insumo.quantity}}</td>
+      <td>{{insumo.unit}}</td>
     </tr>
-    <tr>
+    <!-- <tr>
       <td>Leche</td>
       <td>55</td>
       <td>Libras</td>
@@ -49,7 +49,7 @@
       <td>Jarabe</td>
       <td>50</td>
       <td>Libras</td>
-    </tr>
+    </tr> -->
   </table>
   
 </ion-content>

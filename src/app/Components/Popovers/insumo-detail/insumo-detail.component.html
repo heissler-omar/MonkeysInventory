@@ -5,12 +5,12 @@
     <ion-col size="4" class="titleItem2">U. medida</ion-col>
   </ion-row>
   <ion-row class="titleRow">
-    <ion-col size="5">Café</ion-col>
-    <ion-col size="3" class="item2">50</ion-col>
-    <ion-col size="4" class="item2">libras</ion-col>
+    <ion-col size="5">{{name}}</ion-col>
+    <ion-col size="3" class="item2">{{quantity}}</ion-col>
+    <ion-col size="4" class="item2">{{unit}}</ion-col>
   </ion-row>
   <ion-row class="buttonRow">
-    <ion-button color="danger" class="editButton" (click)="presentAlert()">Eliminar</ion-button> &nbsp;
-    <ion-button class="editButton" (click)="presentModal($event)">Editar</ion-button>
+    <ion-button color="danger" class="editButton" (click)="dismiss(); presentAlertConfirm()">Eliminar</ion-button> &nbsp;
+    <ion-button class="editButton" (click)="dismiss(); presentModalEditInsumo()">Editar</ion-button>
   </ion-row>
 </ion-grid>

@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Insumo } from 'src/app/Models/insumos.interface';
+import { FirestoreService } from 'src/app/Services/firestore.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-edit-insumo',
@@ -8,12 +11,51 @@ import { ModalController } from '@ionic/angular';
 })
 export class EditInsumoComponent implements OnInit {
 
-  constructor(public modalController: ModalController) { }
+  constructor(
+    public modalController: ModalController,
+    public firestoreService: FirestoreService,
+    public toastController: ToastController
+    ) { }
 
-  ngOnInit() {}
+  @Input() id: string;
+  @Input() name: string;
+  @Input() quantity: number;
+  @Input() unit: string;
+
+  newInsumo: Insumo = {
+    id: '',
+    name: '',
+    quantity: null,
+    unit: ''
+  };
+
+  ngOnInit() {
+    this.newInsumo = {
+      id: this.id,
+      name: this.name,
+      quantity: this.quantity,
+      unit: this.unit
+    }
+  }
 
   dismissModal(){
     this.modalController.dismiss({});
+  }
+
+  updateInsumo() {
+    this.firestoreService.updateInsumo(this.newInsumo, 'Insumos/', this.id).then(response => {
+      this.presentToast('Insumo editado exitosamente.');
+    }).catch(response => {
+      this.presentToast('El insumo no se pudo editar.');
+    });
+  }
+
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
 
 }

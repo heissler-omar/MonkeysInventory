@@ -31,61 +31,15 @@
     <ion-searchbar placeholder="Buscar"></ion-searchbar>
 
     <ion-list>
-      <ion-item button (click)="presentPopover($event)">
+
+      <ion-item button (click)="getData(insumo); presentPopover($event)" *ngFor="let insumo of insumos">
         <ion-icon name="list-circle-outline" slot="start"></ion-icon>
-        <ion-label>Café</ion-label>
-        <ion-label slot="end" class="detailLabel">50</ion-label>
-        <ion-label slot="end" class="detailLabel">Libras</ion-label>
+        <ion-label>{{insumo.name}}</ion-label>
+        <ion-label slot="end" class="detailLabel">{{insumo.quantity}}</ion-label>
+        <ion-label slot="end" class="detailLabel">{{insumo.unit}}</ion-label>
         <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
       </ion-item>
-  
-      <ion-item button (click)="presentPopover($event)">
-        <ion-icon name="list-circle-outline" slot="start"></ion-icon>
-        <ion-label>Leche</ion-label>
-        <ion-label slot="end" class="detailLabel">55</ion-label>
-        <ion-label slot="end" class="detailLabel">Litros</ion-label>
-        <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
-      </ion-item>
-  
-      <ion-item button (click)="presentPopover($event)">
-        <ion-icon name="list-circle-outline" slot="start"></ion-icon>
-        <ion-label>Leche espumada</ion-label>
-        <ion-label slot="end" class="detailLabel">60</ion-label>
-        <ion-label slot="end" class="detailLabel">Libras</ion-label>
-        <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
-      </ion-item>
-  
-      <ion-item button (click)="presentPopover($event)">
-        <ion-icon name="list-circle-outline" slot="start"></ion-icon>
-        <ion-label>Espresso</ion-label>
-        <ion-label slot="end" class="detailLabel">50</ion-label>
-        <ion-label slot="end" class="detailLabel">Libras</ion-label>
-        <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
-      </ion-item>
-  
-      <ion-item button (click)="presentPopover($event)">
-        <ion-icon name="list-circle-outline" slot="start"></ion-icon>
-        <ion-label>Chai</ion-label>
-        <ion-label slot="end" class="detailLabel">50</ion-label>
-        <ion-label slot="end" class="detailLabel">Libras</ion-label>
-        <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
-      </ion-item>
-  
-      <ion-item button (click)="presentPopover($event)">
-        <ion-icon name="list-circle-outline" slot="start"></ion-icon>
-        <ion-label>Azucar</ion-label>
-        <ion-label slot="end" class="detailLabel">50</ion-label>
-        <ion-label slot="end" class="detailLabel">Libras</ion-label>
-        <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
-      </ion-item>
-  
-      <ion-item button (click)="presentPopover($event)">
-        <ion-icon name="list-circle-outline" slot="start"></ion-icon>
-        <ion-label>Jarabe</ion-label>
-        <ion-label slot="end" class="detailLabel">50</ion-label>
-        <ion-label slot="end" class="detailLabel">Libras</ion-label>
-        <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
-      </ion-item>
+
     </ion-list>
 
   </ion-card>

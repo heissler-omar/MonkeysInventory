@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, Input, OnInit } from '@angular/core';
+import { ModalController, PopoverController } from '@ionic/angular';
 import { EditInsumoComponent } from '../../Modals/edit-insumo/edit-insumo.component';
 import { AlertController } from '@ionic/angular';
+import { FirestoreService } from 'src/app/Services/firestore.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-insumo-detail',
@@ -10,29 +12,75 @@ import { AlertController } from '@ionic/angular';
 })
 export class InsumoDetailComponent implements OnInit {
 
-  constructor(public modalController: ModalController, public alertController: AlertController) { }
+  @Input() id: string;
+  @Input() name: string;
+  @Input() quantity: number;
+  @Input() unit: string;
+
+  constructor(
+    public modalController: ModalController,
+    public alertController: AlertController,
+    public popoverController: PopoverController,
+    public firestoreService: FirestoreService,
+    public toastController: ToastController
+  ) { }
 
   ngOnInit() {}
 
-  async presentModal() {
+  dismiss() {
+    this.popoverController.dismiss({});
+  }
+
+  async presentModalEditInsumo() {
     const modal = await this.modalController.create({
       component: EditInsumoComponent,
+      componentProps: {
+        id: this.id,
+        name: this.name,
+        quantity: this.quantity,
+        unit: this.unit
+      },
       cssClass: 'my-custom-class'
     });
     return await modal.present();
   }
 
-  async presentAlert() {
+  async presentAlertConfirm() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: '¿Estás seguro(a) de querer eliminar el insumo?',
-      buttons: ['Cancelar', 'Eliminar']
+      header: 'Eliminar Insumo',
+      message: '¿Estás seguro(a) de querer eliminar el insumo: ' + '<strong>'+ this.name + '</strong>?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Eliminar',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.firestoreService.deleteInsumo('Insumos/', this.id).then(response => {
+              this.presentToast('Insumo eliminado exitosamente.');
+            }).catch(response => {
+              this.presentToast('El insumo no se pudo eliminar');
+            });
+          }
+        }
+      ]
     });
 
     await alert.present();
+  }
 
-    const { role } = await alert.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
 
 }

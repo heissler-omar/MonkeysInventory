@@ -15,7 +15,7 @@
           Nombre:
         </ion-col>
         <ion-col size="7.1">
-          <input type="text" class="input">
+          <input [(ngModel)]="newInsumo.name" type="text" class="input">
         </ion-col>
       </ion-row>
       <ion-row class="formRow">
@@ -23,7 +23,7 @@
           Cantidad existente:
         </ion-col>
         <ion-col size="7.1">
-          <input type="number" class="input">
+          <input [(ngModel)]="newInsumo.quantity" type="number" class="input">
         </ion-col>
       </ion-row>
       <ion-row class="formRow">
@@ -31,11 +31,11 @@
           Unidad de medida:
         </ion-col>
         <ion-col size="7.1">
-          <input type="text" class="input">
+          <input [(ngModel)]="newInsumo.unit" type="text" class="input">
         </ion-col>
       </ion-row>
       <ion-row class="buttonRow">
-        <ion-button class="saveButton">Guardar</ion-button>
+        <ion-button class="saveButton" (click)="createInsumo()">Guardar</ion-button>
       </ion-row>
     </ion-grid>
   </ion-card>
