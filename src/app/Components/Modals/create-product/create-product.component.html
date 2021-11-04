@@ -24,7 +24,7 @@
           Nombre:
         </ion-col>
         <ion-col size="9" class="colInput">
-          <input type="text" class="input">
+          <input [(ngModel)]="newProduct.name" type="text" class="input">
         </ion-col>
       </ion-row>
 
@@ -33,9 +33,9 @@
           Categoría:
         </ion-col>
         <ion-col size="9" class="colInput">
-          <select name="cars" id="cars" class="selectOption">
-            <option value="volvo">Bebida</option>
-            <option value="saab">Comida</option>
+          <select class="selectOption" [(ngModel)]="newProduct.category">
+            <option value="Bebida">Bebida</option>
+            <option value="Comida">Comida</option>
           </select>
         </ion-col>
       </ion-row>
@@ -45,7 +45,7 @@
           Precio:
         </ion-col>
         <ion-col size="9" class="colInput">
-          <input type="number" class="input">
+          <input [(ngModel)]="newProduct.price" type="number" class="input">
         </ion-col>
       </ion-row>
 
@@ -53,7 +53,7 @@
         <ion-col class="inputTitle">
           Insumos:
         </ion-col>
-        <ion-col size="9">
+        <ion-col size="9" *ngIf="dropdownList.length != 0">
 
           <ng-multiselect-dropdown
             [placeholder]="'Seleccionar insumos'"
@@ -79,12 +79,13 @@
         </ion-col>
       </ion-row>
 
-      <ion-row class="insumoRow" *ngFor="let item of selectedInsumos">
+      <ion-row class="insumoRow" *ngFor="let item of selectedInsumos; index as i">
         <ion-col>
+          {{i}}
           <input type="text" class="inputInsumo" readonly value="{{item.name}}">
         </ion-col>
         <ion-col>
-          <input type="number" placeholder="cantidad" class="inputQuantity">
+          <input [(ngModel)]="insumosArray[i]" type="number" placeholder="cantidad" class="inputQuantity">
         </ion-col>
         <ion-col>
           <input type="text" class="inputInsumo" readonly value="Libras">
@@ -92,7 +93,7 @@
       </ion-row>
 
       <ion-row class="buttonRow">
-        <ion-button class="saveButton">Guardar</ion-button>
+        <ion-button class="saveButton" (click)="test(); createProduct()">Guardar</ion-button>
       </ion-row>
 
     </ion-grid>

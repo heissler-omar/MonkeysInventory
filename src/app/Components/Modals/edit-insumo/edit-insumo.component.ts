@@ -26,7 +26,8 @@ export class EditInsumoComponent implements OnInit {
     id: '',
     name: '',
     quantity: null,
-    unit: ''
+    unit: '',
+    isAssigned: false
   };
 
   ngOnInit() {
@@ -34,7 +35,8 @@ export class EditInsumoComponent implements OnInit {
       id: this.id,
       name: this.name,
       quantity: this.quantity,
-      unit: this.unit
+      unit: this.unit,
+      isAssigned: false
     }
   }
 

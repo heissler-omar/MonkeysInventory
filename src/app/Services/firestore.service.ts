@@ -31,4 +31,11 @@ export class FirestoreService {
   updateInsumo(data: any, path: string, id: string) {
     return this.db.collection(path).doc(id).update(data);
   }
+
+
+
+  createProduct(data: any, path: string, id: string) {
+    return this.db.collection(path).doc(id).set(data);
+  }  
+
 }

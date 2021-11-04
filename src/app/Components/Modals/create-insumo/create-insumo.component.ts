@@ -4,7 +4,6 @@ import { Insumo } from 'src/app/Models/insumos.interface';
 import { FirestoreService } from 'src/app/Services/firestore.service';
 import { ToastController } from '@ionic/angular';
 
-
 @Component({
   selector: 'app-create-insumo',
   templateUrl: './create-insumo.component.html',
@@ -24,7 +23,8 @@ export class CreateInsumoComponent implements OnInit {
     id: this.firestoreService.getId(),
     name: '',
     quantity: null,
-    unit: ''
+    unit: '',
+    isAssigned: false
   };
 
   ngOnInit() {}
@@ -44,7 +44,8 @@ export class CreateInsumoComponent implements OnInit {
       id: this.firestoreService.getId(),
       name: '',
       quantity: null,
-      unit: ''
+      unit: '',
+      isAssigned: false
     };
   }
 
