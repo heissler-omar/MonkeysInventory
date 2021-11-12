@@ -79,16 +79,15 @@
         </ion-col>
       </ion-row>
 
-      <ion-row class="insumoRow" *ngFor="let item of selectedInsumos; index as i">
+      <ion-row class="insumoRow" *ngFor="let item of selectedInsumos; index as i"> 
         <ion-col>
-          {{i}}
           <input type="text" class="inputInsumo" readonly value="{{item.name}}">
         </ion-col>
         <ion-col>
           <input [(ngModel)]="insumosArray[i]" type="number" placeholder="cantidad" class="inputQuantity">
         </ion-col>
         <ion-col>
-          <input type="text" class="inputInsumo" readonly value="Libras">
+          <input type="text" class="inputInsumo" readonly value="{{item.unit}}">
         </ion-col>
       </ion-row>
 

@@ -16,6 +16,7 @@ export class InsumoDetailComponent implements OnInit {
   @Input() name: string;
   @Input() quantity: number;
   @Input() unit: string;
+  @Input() isAssigned: boolean;
 
   constructor(
     public modalController: ModalController,
@@ -38,7 +39,8 @@ export class InsumoDetailComponent implements OnInit {
         id: this.id,
         name: this.name,
         quantity: this.quantity,
-        unit: this.unit
+        unit: this.unit,
+        isAssigned: this.isAssigned
       },
       cssClass: 'my-custom-class'
     });

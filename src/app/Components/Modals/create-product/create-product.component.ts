@@ -30,14 +30,12 @@ export class CreateProductComponent implements OnInit {
   };
 
   insumosArray = [];
-  insumosName = []
-
 
   dropdownList = [];
-  // selectedItems = [];
   dropdownSettings: IDropdownSettings;
 
-  selectedInsumos = []
+  selectedInsumos = [];
+  selectedInsumosWithUnit = [];
 
   ngOnInit() {
     this.getInsumos();
@@ -75,10 +73,21 @@ export class CreateProductComponent implements OnInit {
 
  
   onItemSelect(item: any) {
-    // console.log(item);
-    this.selectedInsumos.push({name: item.item_text, id: item.item_id, quantity: null, isAssigned: true});
-    console.log('Array: ', this.selectedInsumos);
+    // console.log('Item:', item);
+
+    this.selectedInsumos.push({name: item.item_text, id: item.item_id, quantity: null, isAssigned: true, unit: ''});
+
+    for(let item in this.selectedInsumos) {
+      this.insumos.map(element => {
+        if (this.selectedInsumos[item].id == element.id) {
+          this.selectedInsumos[item].unit = element.unit;
+        }
+      });
+    }
+
+    console.log('selectedInsumos: ', this.selectedInsumos);
   }
+
   onItemDeSelect(items: any) {
     // console.log(items);
     const index = this.selectedInsumos.map(function(e) { return e.id; }).indexOf(items.item_id);
@@ -110,7 +119,7 @@ export class CreateProductComponent implements OnInit {
       }
 
       for(var insumo of this.insumos) {
-        this.dropdownList.push({item_id: insumo.id, item_text: insumo.name, unit: insumo.unit})
+        this.dropdownList.push({item_id: insumo.id, item_text: insumo.name})
       }
 
       console.log('Lista: ', this.dropdownList);
@@ -160,6 +169,5 @@ export class CreateProductComponent implements OnInit {
 
     console.log('Final: ',this.newProduct)
   }
-
 
 }

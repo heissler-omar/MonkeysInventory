@@ -28,6 +28,7 @@ export class Tab1Page implements OnInit {
   name: string;
   quantity: number;
   unit: string;
+  isAssigned: boolean;
 
   ngOnInit() {
     this.getInsumos();
@@ -64,7 +65,8 @@ export class Tab1Page implements OnInit {
         id: this.insumoId,
         name: this.name,
         quantity: this.quantity,
-        unit: this.unit
+        unit: this.unit,
+        isAssigned: this.isAssigned
       },
       cssClass: 'popInsumoDetail',
       event: ev,
@@ -116,6 +118,7 @@ export class Tab1Page implements OnInit {
     this.name = insumo.name;
     this.quantity = insumo.quantity;
     this.unit = insumo.unit;
+    this.isAssigned = insumo.isAssigned;
   }
 
   

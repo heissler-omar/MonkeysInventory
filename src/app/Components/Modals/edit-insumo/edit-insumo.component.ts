@@ -21,6 +21,7 @@ export class EditInsumoComponent implements OnInit {
   @Input() name: string;
   @Input() quantity: number;
   @Input() unit: string;
+  @Input() isAssigned: boolean;
 
   newInsumo: Insumo = {
     id: '',
@@ -36,7 +37,7 @@ export class EditInsumoComponent implements OnInit {
       name: this.name,
       quantity: this.quantity,
       unit: this.unit,
-      isAssigned: false
+      isAssigned: this.isAssigned
     }
   }
 
