@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import { FirestoreService } from 'src/app/Services/firestore.service';
 import { EditProductComponent } from '../edit-product/edit-product.component';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-product-detail',
@@ -10,9 +12,22 @@ import { EditProductComponent } from '../edit-product/edit-product.component';
 })
 export class ProductDetailComponent implements OnInit {
 
-  constructor(public modalController: ModalController, public alertController: AlertController) { }
+  constructor(
+    public modalController: ModalController, 
+    public alertController: AlertController,
+    public firestoreService: FirestoreService,
+    public toastController: ToastController
+  ) { }
 
-  ngOnInit() {}
+  @Input() id: string;
+  @Input() name: any;
+  @Input() price: any;
+  @Input() category: any;
+  @Input() insumos: any;
+
+  ngOnInit() {
+    console.log(this.insumos)
+  }
 
   dismissModal() {
     this.modalController.dismiss({});
@@ -42,13 +57,50 @@ export class ProductDetailComponent implements OnInit {
         }, {
           text: 'Eliminar',
           handler: () => {
-            console.log('Confirm Okay');
+            this.deleteProduct();
+            this.dismissModal();
           }
         }
       ]
     });
 
     await alert.present();
+  }
+
+  test() {
+    this.firestoreService.getProduct('Productos/', this.id).subscribe(response => {
+      console.log(response)
+    })
+  }
+
+  deleteProduct() {
+    // let product: any;
+    // this.firestoreService.getProduct('Productos/', this.id).subscribe(response => {
+    //   product = response;
+    // });
+    // let insumos: [] = product.insumos;
+    console.log(this.insumos);
+
+    for(let item in this.insumos) {
+      this.insumos[item].assignments = this.insumos[item].assignments - 1;
+      if (this.insumos[item].assignments == 0) {
+        this.insumos[item].isAssigned = false;
+      }
+      this.firestoreService.updateInsumo(this.insumos[item], 'Insumos/', this.insumos[item].id);
+    }
+
+
+    this.firestoreService.deleteProduct('Productos/', this.id).then(response => {
+      this.presentToast('Producto eliminado satisfactoriamente.');
+    })
+  }
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
 
 }

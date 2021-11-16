@@ -4,6 +4,8 @@ import { CreateProductComponent } from '../Components/Modals/create-product/crea
 import { ProductsTableComponent } from '../Components/Modals/products-table/products-table.component';
 import { AlertController } from '@ionic/angular';
 import { ProductDetailComponent } from '../Components/Modals/product-detail/product-detail.component';
+import { FirestoreService } from '../Services/firestore.service';
+import { Producto } from 'src/app/Models/products.interface';
 
 @Component({
   selector: 'app-tab3',
@@ -12,10 +14,22 @@ import { ProductDetailComponent } from '../Components/Modals/product-detail/prod
 })
 export class Tab3Page implements OnInit {
 
-  constructor(public modalController: ModalController, public alertController: AlertController) {}
+  constructor(
+    public modalController: ModalController, 
+    public alertController: AlertController,
+    public firestoreService: FirestoreService
+  ) {}
 
+  products: Producto[] = [];
+  id: string;
+  name: any;
+  price: any;
+  category: any;
+  insumos = [];
+  status: string;
 
   ngOnInit() {
+    this.getProducts();
   }
 
   async presentModal() {
@@ -37,6 +51,13 @@ export class Tab3Page implements OnInit {
   async presentModalProductDetail() {
     const modal = await this.modalController.create({
       component: ProductDetailComponent,
+      componentProps: {
+        id: this.id,
+        name: this.name,
+        price: this.price,
+        category: this.category,
+        insumos: this.insumos
+      },
       cssClass: 'productDetailModal'
     });
     return await modal.present();
@@ -65,6 +86,30 @@ export class Tab3Page implements OnInit {
     });
 
     await alert.present();
+  }
+
+
+  getProducts(){
+    // this.products.length = null;
+    this.firestoreService.getProductsCollection<Producto>('Productos/').subscribe(products => {
+      this.status = 'waiting';
+      this.products = products;
+
+      if (this.products.length == 0) {
+        this.status = 'without data';
+      } else if (this.products.length > 0) {
+        this.status = 'with data';
+      }
+    });
+    console.log(this.products);
+  }
+
+  getProductData(product){
+    this.id = product.id;
+    this.name = product.name;
+    this.price = product.price;
+    this.category = product.category;
+    this.insumos = product.insumos;
   }
 
 }

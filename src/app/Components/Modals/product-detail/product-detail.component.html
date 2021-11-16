@@ -5,23 +5,27 @@
 
   <ion-row>
     <ion-col class="title">
-      Latte y Capu Saborizado
+      {{name}}
     </ion-col>
   </ion-row>
 
   <ion-row class="itemRow">
     <ion-col class="itemTitle">Categoría:</ion-col>
-    <ion-col>Bebida</ion-col>
+    <ion-col>{{category}}</ion-col>
   </ion-row>
 
   <ion-row class="itemRow">
     <ion-col class="itemTitle">Precio:</ion-col>
-    <ion-col>Bebida</ion-col>
+    <ion-col>{{price}}</ion-col>
   </ion-row>
 
   <ion-row class="itemRow">
     <ion-col class="itemTitle">Insumos:</ion-col>
-    <ion-col>Café <br> Azucar <br> Leche</ion-col>
+    <ion-col>
+      <ion-row *ngFor="let item of insumos">
+        • {{item.name}}
+      </ion-row>
+    </ion-col>
   </ion-row>
 
   <ion-row>

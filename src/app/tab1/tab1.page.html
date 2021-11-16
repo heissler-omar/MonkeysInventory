@@ -30,8 +30,7 @@
   
     <ion-searchbar placeholder="Buscar"></ion-searchbar>
 
-    <ion-list>
-
+    <ion-list *ngIf="status == 'with data'">
       <ion-item button (click)="getData(insumo); presentPopover($event)" *ngFor="let insumo of insumos">
         <ion-icon name="list-circle-outline" slot="start"></ion-icon>
         <ion-label>{{insumo.name}}</ion-label>
@@ -39,7 +38,12 @@
         <ion-label slot="end" class="detailLabel">{{insumo.unit}}</ion-label>
         <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
       </ion-item>
-
+    </ion-list>
+    <ion-list *ngIf="status == 'without data'" class="withoutData">
+      No hay insumos registrados.
+    </ion-list>
+    <ion-list *ngIf="status == waiting">
+      <ion-progress-bar type="indeterminate"></ion-progress-bar>
     </ion-list>
 
   </ion-card>

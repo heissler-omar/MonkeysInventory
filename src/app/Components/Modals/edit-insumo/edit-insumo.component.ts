@@ -22,13 +22,15 @@ export class EditInsumoComponent implements OnInit {
   @Input() quantity: number;
   @Input() unit: string;
   @Input() isAssigned: boolean;
+  @Input() assignments: number;
 
   newInsumo: Insumo = {
     id: '',
     name: '',
     quantity: null,
     unit: '',
-    isAssigned: false
+    isAssigned: false,
+    assignments: 0
   };
 
   ngOnInit() {
@@ -37,7 +39,8 @@ export class EditInsumoComponent implements OnInit {
       name: this.name,
       quantity: this.quantity,
       unit: this.unit,
-      isAssigned: this.isAssigned
+      isAssigned: this.isAssigned,
+      assignments: this.assignments
     }
   }
 

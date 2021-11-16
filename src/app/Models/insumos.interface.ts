@@ -3,5 +3,6 @@ export interface Insumo {
     name: string,
     quantity: number,
     unit: string,
-    isAssigned: boolean
+    isAssigned: boolean,
+    assignments: number
 }

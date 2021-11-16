@@ -24,7 +24,8 @@ export class CreateInsumoComponent implements OnInit {
     name: '',
     quantity: null,
     unit: '',
-    isAssigned: false
+    isAssigned: false,
+    assignments: 0
   };
 
   ngOnInit() {}
@@ -45,7 +46,8 @@ export class CreateInsumoComponent implements OnInit {
       name: '',
       quantity: null,
       unit: '',
-      isAssigned: false
+      isAssigned: false,
+      assignments: 0
     };
   }
 

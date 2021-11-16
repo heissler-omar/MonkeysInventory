@@ -75,12 +75,13 @@ export class CreateProductComponent implements OnInit {
   onItemSelect(item: any) {
     // console.log('Item:', item);
 
-    this.selectedInsumos.push({name: item.item_text, id: item.item_id, quantity: null, isAssigned: true, unit: ''});
+    this.selectedInsumos.push({name: item.item_text, id: item.item_id, quantity: null, isAssigned: true, unit: '', assignments: null});
 
     for(let item in this.selectedInsumos) {
       this.insumos.map(element => {
         if (this.selectedInsumos[item].id == element.id) {
           this.selectedInsumos[item].unit = element.unit;
+          this.selectedInsumos[item].assignments = element.assignments;
         }
       });
     }
@@ -129,22 +130,23 @@ export class CreateProductComponent implements OnInit {
   }
 
   createProduct() {
+    for(let item in this.newProduct.insumos) {
+
+      delete this.newProduct.insumos[item].quantity;
+      delete this.newProduct.insumos[item].unit;
+      this.newProduct.insumos[item].assignments = this.newProduct.insumos[item].assignments + 1;
+
+      // console.log('array completo: ', this.newProduct.insumos)
+      // console.log('Nuevo insumo: ', item)
+
+      this.firestoreService.updateInsumo(this.newProduct.insumos[item], 'Insumos/', this.newProduct.insumos[item].id);
+    }
+
     this.firestoreService.createProduct(this.newProduct, this.path, this.newProduct.id).then(response => {
       this.presentToast('Producto creado exitosamente.');
     }).catch(error => {
       this.presentToast('El producto no fue creado.');
     });
-
-    for(let item of this.newProduct.insumos) {
-      // console.log('Insumos ind: ', item)
-
-      delete item.name;
-      delete item.quantity;
-
-      console.log('Nuevo: ', item)
-
-      this.firestoreService.updateInsumo(item, 'Insumos/', item.id);
-    }
 
 
     this.dismissModal();

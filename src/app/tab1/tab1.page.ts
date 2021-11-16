@@ -29,6 +29,8 @@ export class Tab1Page implements OnInit {
   quantity: number;
   unit: string;
   isAssigned: boolean;
+  assignments: number;
+  status: string;
 
   ngOnInit() {
     this.getInsumos();
@@ -66,7 +68,8 @@ export class Tab1Page implements OnInit {
         name: this.name,
         quantity: this.quantity,
         unit: this.unit,
-        isAssigned: this.isAssigned
+        isAssigned: this.isAssigned,
+        assignments: this.assignments
       },
       cssClass: 'popInsumoDetail',
       event: ev,
@@ -108,9 +111,20 @@ export class Tab1Page implements OnInit {
 
   getInsumos() {
     this.firestoreService.getInsumosCollection<Insumo>('Insumos/').subscribe(response => {
-      console.log(response);
+      this.status = 'waiting';
       this.insumos = response;
+      
+      if (this.insumos.length == 0) {
+        this.status = 'without data';
+      } else if (this.insumos.length > 0) {
+        this.status = 'with data';
+      }
+
+      console.log('Estatus: ',this.status)
+    console.log(this.insumos.length)
+
     });
+    
   }
 
   getData(insumo) {
@@ -119,6 +133,7 @@ export class Tab1Page implements OnInit {
     this.quantity = insumo.quantity;
     this.unit = insumo.unit;
     this.isAssigned = insumo.isAssigned;
+    this.assignments = insumo.assignments;
   }
 
   
