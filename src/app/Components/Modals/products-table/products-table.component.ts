@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { FirestoreService } from 'src/app/Services/firestore.service';
+import { Producto } from 'src/app/Models/products.interface';
 
 @Component({
   selector: 'app-products-table',
@@ -8,9 +10,18 @@ import { ModalController } from '@ionic/angular';
 })
 export class ProductsTableComponent implements OnInit {
 
-  constructor(public modalController: ModalController) { }
+  constructor(
+    public modalController: ModalController,
+    public firestoreService: FirestoreService
+  ) { }
 
-  ngOnInit() {}
+  products: Producto[] = [];
+
+  ngOnInit() {
+    this.firestoreService.getProductsCollection<Producto>('Productos/').subscribe(response => {
+      this.products = response;
+    });
+  }
 
   dismissModal(){
     this.modalController.dismiss({});

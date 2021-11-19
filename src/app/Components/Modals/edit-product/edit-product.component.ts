@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
@@ -10,6 +10,12 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 export class EditProductComponent implements OnInit {
 
   constructor(public modalController: ModalController) { }
+
+  @Input() id: string;
+  @Input() name: any;
+  @Input() price: any;
+  @Input() category: any;
+  @Input() insumos: any;
 
   dropdownList = [];
   // selectedItems = [];

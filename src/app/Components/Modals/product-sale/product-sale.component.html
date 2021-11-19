@@ -4,16 +4,25 @@
 </ion-row>
   <ion-row>
     <ion-col class="title">
-      Latte y Capu Saborizado
+      {{name}}
     </ion-col>
   </ion-row>
   <ion-row>
     <ion-col>Categoría:</ion-col>
-    <ion-col>Bebida</ion-col>
+    <ion-col size="8">{{category}}</ion-col>
   </ion-row>
 
   <ion-row>
-    <ion-col>Cantidad a vender:</ion-col>
+    <ion-col>Insumos:</ion-col>
+    <ion-col size="8">
+      <ion-row *ngFor="let item of insumos">
+        • {{item.name}} ({{item.quantity}} {{item.unit}})
+      </ion-row>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col>Cantidad:</ion-col>
   </ion-row>
 
   <ion-row>
@@ -31,8 +40,15 @@
   </ion-row>
 
   <ion-row>
+    <ion-col>Precio:</ion-col>
+    <ion-col size="8">Q&nbsp;{{(price * number).toFixed(2)}}</ion-col>
+  </ion-row>
+
+  <ion-row>
    <ion-col class="sellCol">
-    <ion-button color="success" (click)="presentAlertConfirm()">Vender</ion-button>
+    <ion-button class="saleButton" *ngIf="originalInsumos.length > 0" color="success" (click)="presentAlertConfirm()">
+      Vender
+    </ion-button>
    </ion-col> 
   </ion-row>
 </ion-grid>

@@ -130,8 +130,14 @@ export class CreateProductComponent implements OnInit {
   }
 
   createProduct() {
-    for(let item in this.newProduct.insumos) {
 
+    this.firestoreService.createProduct(this.newProduct, this.path, this.newProduct.id).then(response => {
+      this.presentToast('Producto creado exitosamente.');
+    }).catch(error => {
+      this.presentToast('El producto no fue creado.');
+    });
+
+    for(let item in this.newProduct.insumos) {
       delete this.newProduct.insumos[item].quantity;
       delete this.newProduct.insumos[item].unit;
       this.newProduct.insumos[item].assignments = this.newProduct.insumos[item].assignments + 1;
@@ -141,13 +147,6 @@ export class CreateProductComponent implements OnInit {
 
       this.firestoreService.updateInsumo(this.newProduct.insumos[item], 'Insumos/', this.newProduct.insumos[item].id);
     }
-
-    this.firestoreService.createProduct(this.newProduct, this.path, this.newProduct.id).then(response => {
-      this.presentToast('Producto creado exitosamente.');
-    }).catch(error => {
-      this.presentToast('El producto no fue creado.');
-    });
-
 
     this.dismissModal();
 
@@ -167,7 +166,7 @@ export class CreateProductComponent implements OnInit {
       this.selectedInsumos[item].quantity = this.insumosArray[item]
     }
 
-    this.newProduct.insumos = this.selectedInsumos
+    this.newProduct.insumos = this.selectedInsumos;
 
     console.log('Final: ',this.newProduct)
   }

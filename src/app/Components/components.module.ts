@@ -14,6 +14,7 @@ import { ProductDetailComponent } from './Modals/product-detail/product-detail.c
 import { ProductSaleComponent } from './Modals/product-sale/product-sale.component';
 import { ProductsTableComponent } from './Modals/products-table/products-table.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SalesHistoryComponent } from './Modals/sales-history/sales-history.component';
 
 
 
@@ -27,7 +28,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     EditProductComponent,
     ProductDetailComponent,
     ProductSaleComponent,
-    ProductsTableComponent
+    ProductsTableComponent,
+    SalesHistoryComponent
   ],
   imports: [
     CommonModule,
@@ -45,7 +47,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     EditProductComponent,
     ProductDetailComponent,
     ProductSaleComponent,
-    ProductsTableComponent
+    ProductsTableComponent,
+    SalesHistoryComponent
   ]
 })
 export class ComponentsModule { }

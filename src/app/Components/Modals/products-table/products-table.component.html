@@ -15,40 +15,10 @@
       <th>Categoría</th>
       <th>Precio</th>
     </tr>
-    <tr>
-      <td>Latte</td>
-      <td></td>
-      <td>Germany</td>
-    </tr>
-    <tr>
-      <td>Capuccino</td>
-      <td>Francisco Chang</td>
-      <td>Mexico</td>
-    </tr>
-    <tr>
-      <td>Late y Capu Saborizado</td>
-      <td>Roland Mendel</td>
-      <td>Austria</td>
-    </tr>
-    <tr>
-      <td>Flat White</td>
-      <td>Helen Bennett</td>
-      <td>UK</td>
-    </tr>
-    <tr>
-      <td>Mocca</td>
-      <td>Yoshi Tannamuri</td>
-      <td>Canada</td>
-    </tr>
-    <tr>
-      <td>Café Negro</td>
-      <td>Giovanni Rovelli</td>
-      <td>Italy</td>
-    </tr>
-    <tr>
-      <td>Café con leche</td>
-      <td>Giovanni Rovelli</td>
-      <td>Italy</td>
+    <tr *ngFor="let item of products">
+      <td>{{item.name}}</td>
+      <td>{{item.category}}</td>
+      <td>Q&nbsp;{{item.price}}</td>
     </tr>
   </table>
   

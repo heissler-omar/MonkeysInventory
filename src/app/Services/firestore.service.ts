@@ -45,6 +45,15 @@ export class FirestoreService {
   }
   deleteProduct(path: string, id: string) {
     return this.db.collection(path).doc(id).delete();
-  } 
+  }
+  
+  
+
+  createSale(data: any, path: string, id: string) {
+    return this.db.collection(path).doc(id).set(data);
+  }
+  getSalesCollection<type>(path: string) {
+    return this.db.collection<type>(path).valueChanges();
+  }
 
 }

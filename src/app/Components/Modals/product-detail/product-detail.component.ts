@@ -36,6 +36,13 @@ export class ProductDetailComponent implements OnInit {
   async presentModalEditProduct() {
     const modal = await this.modalController.create({
       component: EditProductComponent,
+      componentProps: {
+        id: this.id,
+        name: this.name,
+        price: this.price,
+        category: this.category,
+        insumos: this.insumos
+      },
       cssClass: 'my-custom-class'
     });
     return await modal.present();
@@ -67,18 +74,7 @@ export class ProductDetailComponent implements OnInit {
     await alert.present();
   }
 
-  test() {
-    this.firestoreService.getProduct('Productos/', this.id).subscribe(response => {
-      console.log(response)
-    })
-  }
-
   deleteProduct() {
-    // let product: any;
-    // this.firestoreService.getProduct('Productos/', this.id).subscribe(response => {
-    //   product = response;
-    // });
-    // let insumos: [] = product.insumos;
     console.log(this.insumos);
 
     for(let item in this.insumos) {

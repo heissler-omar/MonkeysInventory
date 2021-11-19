@@ -34,54 +34,22 @@
     <ion-searchbar placeholder="Buscar producto"></ion-searchbar>
 
     <div class="listDiv">
-      <ion-list >
-        <ion-item button (click)="presentModalProductSale()">
+      <ion-list *ngIf="status == 'full'">
+        <ion-item button (click)="getData(item); presentModalProductSale()" *ngFor="let item of productos">
           <ion-icon name="list-circle-outline" slot="start"></ion-icon>
-          <ion-label>Latte</ion-label>
-          <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
-        </ion-item>
-    
-        <ion-item button (click)="presentModalProductSale()">
-          <ion-icon name="list-circle-outline" slot="start"></ion-icon>
-          <ion-label>Capuccino</ion-label>
-          <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
-        </ion-item>
-    
-        <ion-item button (click)="presentModalProductSale()">
-          <ion-icon name="list-circle-outline" slot="start"></ion-icon>
-          <ion-label>Latte y Capu Saborizado</ion-label>
-          <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
-        </ion-item>
-    
-        <ion-item button (click)="presentModalProductSale()">
-          <ion-icon name="list-circle-outline" slot="start"></ion-icon>
-          <ion-label>Flat White</ion-label>
-          <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
-        </ion-item>
-    
-        <ion-item button (click)="presentModalProductSale()">
-          <ion-icon name="list-circle-outline" slot="start"></ion-icon>
-          <ion-label>Mocca</ion-label>
-          <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
-        </ion-item>
-    
-        <ion-item button (click)="presentModalProductSale()">
-          <ion-icon name="list-circle-outline" slot="start"></ion-icon>
-          <ion-label>Café Negro</ion-label>
-          <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
-        </ion-item>
-    
-        <ion-item button (click)="presentModalProductSale()">
-          <ion-icon name="list-circle-outline" slot="start"></ion-icon>
-          <ion-label>Café con leche</ion-label>
+          <ion-label>{{item.name}}</ion-label>
           <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
         </ion-item>
       </ion-list>
+      <ion-list *ngIf="status == 'empty'" class="empty">
+        No hay productos registrados.
+      </ion-list>
+      <ion-list *ngIf="status == waiting">
+        <ion-progress-bar type="indeterminate" class="progressBar"></ion-progress-bar>
+      </ion-list>
     </div>
-    
 
   </ion-card>
-
 
   <ion-card class="ion-activatable ripple-parent" (click)="presentModal()">
     <ion-ripple-effect></ion-ripple-effect>
