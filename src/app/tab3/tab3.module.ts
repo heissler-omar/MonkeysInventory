@@ -7,8 +7,8 @@ import { Tab3Page } from './tab3.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { Tab3PageRoutingModule } from './tab3-routing.module';
-// import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ComponentsModule } from '../Components/components.module';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -18,8 +18,8 @@ import { ComponentsModule } from '../Components/components.module';
     ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: Tab3Page }]),
     Tab3PageRoutingModule,
-    // NgMultiSelectDropDownModule.forRoot(),
     ComponentsModule,
+    PipesModule
   ],
   declarations: [Tab3Page]
 })

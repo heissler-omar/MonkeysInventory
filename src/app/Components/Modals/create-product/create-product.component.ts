@@ -4,6 +4,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { FirestoreService } from 'src/app/Services/firestore.service';
 import { Insumo } from 'src/app/Models/insumos.interface';
 import { Producto } from 'src/app/Models/products.interface';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-create-product',
@@ -15,7 +16,8 @@ export class CreateProductComponent implements OnInit {
   constructor(
     public modalController: ModalController,
     public firestoreService: FirestoreService,
-    public toastController: ToastController
+    public toastController: ToastController,
+    public alertController: AlertController
   ) { }
 
   insumos: Insumo[] = []
@@ -130,27 +132,59 @@ export class CreateProductComponent implements OnInit {
   }
 
   createProduct() {
+    let flag: number = 1;
+    let flag2: boolean = false;
 
-    this.firestoreService.createProduct(this.newProduct, this.path, this.newProduct.id).then(response => {
-      this.presentToast('Producto creado exitosamente.');
-    }).catch(error => {
-      this.presentToast('El producto no fue creado.');
-    });
+    if (this.newProduct.name != '' && this.newProduct.category != '' && this.newProduct.price != null && this.newProduct.insumos.length != 0) {
 
-    for(let item in this.newProduct.insumos) {
-      delete this.newProduct.insumos[item].quantity;
-      delete this.newProduct.insumos[item].unit;
-      this.newProduct.insumos[item].assignments = this.newProduct.insumos[item].assignments + 1;
+      for(let item in this.newProduct.insumos) {
+        if (this.newProduct.insumos[item].quantity != null) {
+          this.newProduct.insumos[item].assignments = this.newProduct.insumos[item].assignments + 1;
+          flag = flag + 1; 
+        } else {
+          flag = flag * 0;
+        }
+      }
 
-      // console.log('array completo: ', this.newProduct.insumos)
-      // console.log('Nuevo insumo: ', item)
+      if (flag > 1) {
+        console.log('Array 1: ', this.newProduct.insumos);
 
-      this.firestoreService.updateInsumo(this.newProduct.insumos[item], 'Insumos/', this.newProduct.insumos[item].id);
+        this.firestoreService.createProduct(this.newProduct, this.path, this.newProduct.id).then(response => {
+          this.presentToast('Producto creado satisfactoriamente.');
+        }).catch(error => {
+          this.presentToast('El producto no fue creado.');
+        });
+        flag2 = true;
+
+      } else if (flag == 0) {
+        this.presentAlert('Para crear el producto se deben configurar los insumos.');
+      }
+
+      if (flag2 == true) {
+        let insumoToUpdate = {
+          id: '',
+          assignments: null,
+          isAssigned: null
+        }
+    
+        for(let item in this.newProduct.insumos) {
+          insumoToUpdate.id = this.newProduct.insumos[item].id;
+          insumoToUpdate.assignments = this.newProduct.insumos[item].assignments;
+          insumoToUpdate.isAssigned = this.newProduct.insumos[item].isAssigned;
+    
+          this.firestoreService.updateInsumo(insumoToUpdate, 'Insumos/', insumoToUpdate.id);
+        }
+    
+        this.dismissModal();
+      }
+  
+     
+    } else {
+      this.presentAlert('Para crear el producto se deben llenar todos los campos.');
     }
 
-    this.dismissModal();
-
   }
+  
 
   async presentToast(message: any) {
     const toast = await this.toastController.create({
@@ -169,6 +203,21 @@ export class CreateProductComponent implements OnInit {
     this.newProduct.insumos = this.selectedInsumos;
 
     console.log('Final: ',this.newProduct)
+    
+  }
+
+  async presentAlert(message: string) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Alerta',
+      message: message,
+      buttons: ['Aceptar']
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    // console.log('onDidDismiss resolved with role', role);
   }
 
 }

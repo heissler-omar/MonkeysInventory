@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { Insumo } from 'src/app/Models/insumos.interface';
 import { FirestoreService } from 'src/app/Services/firestore.service';
 import { ToastController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-edit-insumo',
@@ -14,8 +15,9 @@ export class EditInsumoComponent implements OnInit {
   constructor(
     public modalController: ModalController,
     public firestoreService: FirestoreService,
-    public toastController: ToastController
-    ) { }
+    public toastController: ToastController,
+    public alertController: AlertController
+  ) { }
 
   @Input() id: string;
   @Input() name: string;
@@ -49,11 +51,17 @@ export class EditInsumoComponent implements OnInit {
   }
 
   updateInsumo() {
-    this.firestoreService.updateInsumo(this.newInsumo, 'Insumos/', this.id).then(response => {
-      this.presentToast('Insumo editado exitosamente.');
-    }).catch(response => {
-      this.presentToast('El insumo no se pudo editar.');
-    });
+    if(this.newInsumo.name != '' && this.newInsumo.quantity != null && this.newInsumo.unit != '') {
+      this.firestoreService.updateInsumo(this.newInsumo, 'Insumos/', this.id).then(response => {
+        this.presentToast('Insumo editado exitosamente.');
+        this.dismissModal();
+      }).catch(response => {
+        this.presentToast('El insumo no se pudo editar.');
+      });
+    } else {
+      this.presentAlert();
+    }
+    
   }
 
   async presentToast(message) {
@@ -62,6 +70,20 @@ export class EditInsumoComponent implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Alerta',
+      message: 'Para guardar los cambios se deben llenar todos los campos.',
+      buttons: ['Aceptar']
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
   }
 
 }

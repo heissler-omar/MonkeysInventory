@@ -27,7 +27,15 @@ export class InsumoDetailComponent implements OnInit {
     public toastController: ToastController
   ) { }
 
-  ngOnInit() {}
+  status: string;
+
+  ngOnInit() {
+    if (this.isAssigned == true) {
+      this.status = 'Sí'
+    } else if (this.isAssigned == false) {
+      this.status = 'No'
+    }
+  }
 
   dismiss() {
     this.popoverController.dismiss({});
@@ -66,17 +74,40 @@ export class InsumoDetailComponent implements OnInit {
           text: 'Eliminar',
           handler: () => {
             console.log('Confirm Okay');
-            this.firestoreService.deleteInsumo('Insumos/', this.id).then(response => {
-              this.presentToast('Insumo eliminado exitosamente.');
-            }).catch(response => {
-              this.presentToast('El insumo no se pudo eliminar');
-            });
+            this.deleteInsumo();
           }
         }
       ]
     });
 
     await alert.present();
+  }
+
+  deleteInsumo(){
+    if (this.isAssigned == false) {
+      this.firestoreService.deleteInsumo('Insumos/', this.id).then(response => {
+        this.presentToast('Insumo eliminado satisfactoriamente.');
+      }).catch(response => {
+        this.presentToast('El insumo no se pudo eliminar');
+      });
+    } else if (this.isAssigned == true) {
+      this.presentAlert();
+    }
+    
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Eliminación de insumo',
+      message: 'No se puede eliminar el insumo porque está asignado a uno o más productos.',
+      buttons: ['Aceptar']
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
   }
 
   async presentToast(message: string) {

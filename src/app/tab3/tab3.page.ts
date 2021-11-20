@@ -6,6 +6,9 @@ import { AlertController } from '@ionic/angular';
 import { ProductDetailComponent } from '../Components/Modals/product-detail/product-detail.component';
 import { FirestoreService } from '../Services/firestore.service';
 import { Producto } from 'src/app/Models/products.interface';
+import { Workbook } from 'exceljs';
+import * as fs from 'file-saver';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-tab3',
@@ -27,6 +30,8 @@ export class Tab3Page implements OnInit {
   category: any;
   insumos = [];
   status: string;
+  textToSearch = '';
+  keyToFilter = 'name';
 
   ngOnInit() {
     this.getProducts();
@@ -80,6 +85,7 @@ export class Tab3Page implements OnInit {
           text: 'Aceptar',
           handler: () => {
             console.log('Confirm Okay');
+            this.downloadExcel();
           }
         }
       ]
@@ -110,6 +116,49 @@ export class Tab3Page implements OnInit {
     this.price = product.price;
     this.category = product.category;
     this.insumos = product.insumos;
+  }
+
+  search(event) {
+    this.textToSearch = event.detail.value;
+  }
+
+  filterByValue(key: string, value: string) {
+    this.keyToFilter = key;
+    this.textToSearch = value;
+  }
+
+  downloadExcel() {
+    //create new excel work book
+    let workbook = new Workbook();
+    //add name to sheet
+    let worksheet = workbook.addWorksheet("Inventario de productos");
+    //add column name
+
+    worksheet.columns = [
+      {width: 16}
+    ]
+
+    let header = ["Nombre", "Categoría", "Precio"]
+    let headerRow = worksheet.addRow(header);
+
+    headerRow.font = {
+      bold: true
+    }
+
+    for (let item of this.products) {
+      let temp = [];
+      temp.push(item.name, item.category, item.price)
+      worksheet.addRow(temp)
+    }
+
+    //set downloadable file name
+    let fname = "Inventario de productos"
+
+    //add data and file name and download
+    workbook.xlsx.writeBuffer().then((data) => {
+      let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      fs.saveAs(blob, fname + ' ' + moment(new Date()).format('DD-MM-YYYY') + '.xlsx');
+    });
   }
 
 }

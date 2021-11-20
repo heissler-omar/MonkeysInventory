@@ -7,13 +7,6 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 2 page"></app-explore-container> -->
 
   <ion-card class="salesCard">
     <ion-card-header>
@@ -21,21 +14,25 @@
     </ion-card-header>
 
     <ion-row class="buttonsRow">
-      <ion-button color="none" class="categoryButton">
+      <ion-button color="none" class="categoryButton" (click)="filterByValue('', 'name')">
+        Todos
+        <ion-icon name="list-outline" slot="end"></ion-icon>
+      </ion-button>&nbsp;
+      <ion-button color="none" class="categoryButton" (click)="filterByValue('Bebida', 'category')">
         Bebidas
         <ion-icon name="cafe-outline" slot="end"></ion-icon>
       </ion-button>&nbsp;
-      <ion-button color="none" class="categoryButton">
+      <ion-button color="none" class="categoryButton" (click)="filterByValue('Comida', 'category')">
         Comida
         <ion-icon name="fast-food-outline" slot="end"></ion-icon>
       </ion-button>
     </ion-row>
 
-    <ion-searchbar placeholder="Buscar producto"></ion-searchbar>
+    <ion-searchbar placeholder="Buscar" (ionChange)="search($event)"></ion-searchbar>
 
     <div class="listDiv">
       <ion-list *ngIf="status == 'full'">
-        <ion-item button (click)="getData(item); presentModalProductSale()" *ngFor="let item of productos">
+        <ion-item button (click)="getData(item); presentModalProductSale()" *ngFor="let item of productos | filtro: textToSearch: keyToFilter">
           <ion-icon name="list-circle-outline" slot="start"></ion-icon>
           <ion-label>{{item.name}}</ion-label>
           <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>

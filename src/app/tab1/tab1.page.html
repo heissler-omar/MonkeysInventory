@@ -28,15 +28,20 @@
       <ion-icon name="download-outline" class="productsIcon" (click)="presentAlert()"></ion-icon>
     </ion-item>
   
-    <ion-searchbar placeholder="Buscar"></ion-searchbar>
+    <ion-searchbar placeholder="Buscar" (ionChange)="buscar( $event )"></ion-searchbar>
 
     <ion-list *ngIf="status == 'with data'">
-      <ion-item button (click)="getData(insumo); presentPopover($event)" *ngFor="let insumo of insumos">
+      <ion-item button (click)="getData(insumo); presentPopover($event)" *ngFor="let insumo of insumos | filtro: textoBuscar: 'name'">
         <ion-icon name="list-circle-outline" slot="start"></ion-icon>
         <ion-label>{{insumo.name}}</ion-label>
-        <ion-label slot="end" class="detailLabel">{{insumo.quantity}}</ion-label>
-        <ion-label slot="end" class="detailLabel">{{insumo.unit}}</ion-label>
-        <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
+        <ion-label class="detailLabel">{{insumo.quantity.toFixed(2)}} {{insumo.unit}}</ion-label>
+        <!-- <ion-label slot="end" class="detailLabel">{{insumo.unit}}</ion-label> -->
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+
+        <!-- <ion-icon name="list-circle-outline" slot="start"></ion-icon>
+        <ion-label>Este es un nombre algo largo</ion-label>
+        <ion-label class="detailLabel">15689asdfasdf3.45616 libras</ion-label>
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon> -->
       </ion-item>
     </ion-list>
     <ion-list *ngIf="status == 'without data'" class="withoutData">

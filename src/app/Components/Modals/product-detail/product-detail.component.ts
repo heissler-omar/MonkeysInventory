@@ -4,6 +4,7 @@ import { AlertController } from '@ionic/angular';
 import { FirestoreService } from 'src/app/Services/firestore.service';
 import { EditProductComponent } from '../edit-product/edit-product.component';
 import { ToastController } from '@ionic/angular';
+import { Insumo } from 'src/app/Models/insumos.interface';
 
 @Component({
   selector: 'app-product-detail',
@@ -25,8 +26,13 @@ export class ProductDetailComponent implements OnInit {
   @Input() category: any;
   @Input() insumos: any;
 
+  insumosCollection: Insumo[] = [];
+
   ngOnInit() {
     console.log(this.insumos)
+    this.firestoreService.getInsumosCollection<Insumo>('Insumos/').subscribe(response => {
+      this.insumosCollection = response;
+    });
   }
 
   dismissModal() {
@@ -52,7 +58,7 @@ export class ProductDetailComponent implements OnInit {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Eliminar producto',
-      message: '¿Estás seguro(a) de querer elimnar el producto?',
+      message: '¿Estás seguro(a) de querer elimnar el producto: ' + '<strong>'+ this.name + '</strong>?',
       buttons: [
         {
           text: 'Cancelar',
@@ -64,7 +70,8 @@ export class ProductDetailComponent implements OnInit {
         }, {
           text: 'Eliminar',
           handler: () => {
-            this.deleteProduct();
+            this.deleteProduct1();
+            this.deleteProduct2();
             this.dismissModal();
           }
         }
@@ -74,18 +81,24 @@ export class ProductDetailComponent implements OnInit {
     await alert.present();
   }
 
-  deleteProduct() {
-    console.log(this.insumos);
-
+  deleteProduct1() {
     for(let item in this.insumos) {
-      this.insumos[item].assignments = this.insumos[item].assignments - 1;
-      if (this.insumos[item].assignments == 0) {
-        this.insumos[item].isAssigned = false;
-      }
-      this.firestoreService.updateInsumo(this.insumos[item], 'Insumos/', this.insumos[item].id);
+      this.insumosCollection.forEach(element => {
+        if (this.insumos[item].id == element.id) {
+          element.assignments = element.assignments - 1;
+          if (element.assignments == 0) {
+            element.isAssigned = false;
+          }
+          this.firestoreService.updateInsumo(element, 'Insumos/', element.id);
+        }
+      });
     }
 
+  }
 
+  deleteProduct2() {
+    console.log('Listo');
+    
     this.firestoreService.deleteProduct('Productos/', this.id).then(response => {
       this.presentToast('Producto eliminado satisfactoriamente.');
     })

@@ -22,7 +22,7 @@
     margin-bottom: 5%;
 }
 .itemRow{
-    border-bottom: solid 1px gray;
+    border-bottom: solid 1px rgb(180, 180, 180);
 }
 .itemTitle{
     text-align: end;
@@ -34,4 +34,7 @@
 }
 .button{
     text-transform: none;
+}
+.buttonsRow{
+    margin-top: 5%;
 }

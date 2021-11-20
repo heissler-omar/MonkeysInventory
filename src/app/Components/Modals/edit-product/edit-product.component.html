@@ -16,7 +16,7 @@
           Nombre:
         </ion-col>
         <ion-col size="9" class="colInput">
-          <input type="text" class="input">
+          <input type="text" class="input" [(ngModel)]="newProduct.name">
         </ion-col>
       </ion-row>
 
@@ -25,9 +25,9 @@
           Categoría:
         </ion-col>
         <ion-col size="9" class="colInput">
-          <select name="cars" id="cars" class="selectOption">
-            <option value="volvo">Bebida</option>
-            <option value="saab">Comida</option>
+          <select class="selectOption" [(ngModel)]="newProduct.category">
+            <option value="Bebida">Bebida</option>
+            <option value="Comida">Comida</option>
           </select>
         </ion-col>
       </ion-row>
@@ -37,7 +37,7 @@
           Precio:
         </ion-col>
         <ion-col size="9" class="colInput">
-          <input type="number" class="input">
+          <input type="number" class="input" [(ngModel)]="newProduct.price">
         </ion-col>
       </ion-row>
 
@@ -45,46 +45,22 @@
         <ion-col class="inputTitle">
           Insumos:
         </ion-col>
-        <ion-col size="9">
-
-          <ng-multiselect-dropdown
-            [placeholder]="'Seleccionar insumos'"
-            [settings]="dropdownSettings"
-            [data]="dropdownList"
-            (onSelect)="onItemSelect($event)"
-            (onDeSelect)="onItemDeSelect($event)"
-            class="multiselect"
-          >
-          </ng-multiselect-dropdown>
-        
-        </ion-col>
       </ion-row>
 
-      <ion-row class="formRow">
-        <ion-col class="inputTitle2" size="12" *ngIf="selectedInsumos.length != 0">
-          Configuración de insumos
-        </ion-col>
-      </ion-row>
-      <ion-row *ngIf="selectedInsumos.length != 0">
+      <ion-row class="insumoRow" *ngFor="let item of newProduct.insumos; index as i">
         <ion-col>
-          Ingresar la cantidad:
-        </ion-col>
-      </ion-row>
-
-      <ion-row class="insumoRow" *ngFor="let item of selectedInsumos">
-        <ion-col>
-          <input type="text" class="inputInsumo" readonly value="{{item.name}}">
+          <input type="text" class="inputInsumo" readonly value="{{newProduct.insumos[i].name}}">
         </ion-col>
         <ion-col>
-          <input type="number" placeholder="cantidad" class="inputQuantity">
+          <input type="number" placeholder="cantidad" class="inputQuantity" [(ngModel)]="item.quantity">
         </ion-col>
         <ion-col>
-          <input type="text" class="inputInsumo" readonly>
+          <input type="text" class="inputInsumo" readonly value="{{newProduct.insumos[i].unit}}">
         </ion-col>
       </ion-row>
 
       <ion-row class="buttonRow">
-        <ion-button class="saveButton">Guardar</ion-button>
+        <ion-button class="saveButton" (click)="saveData()">Guardar</ion-button>
       </ion-row>
 
     </ion-grid>

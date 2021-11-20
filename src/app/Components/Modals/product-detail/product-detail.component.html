@@ -11,27 +11,27 @@
 
   <ion-row class="itemRow">
     <ion-col class="itemTitle">Categoría:</ion-col>
-    <ion-col>{{category}}</ion-col>
+    <ion-col size="8">{{category}}</ion-col>
   </ion-row>
 
   <ion-row class="itemRow">
     <ion-col class="itemTitle">Precio:</ion-col>
-    <ion-col>{{price}}</ion-col>
+    <ion-col size="8">Q&nbsp;{{price.toFixed(2)}}</ion-col>
   </ion-row>
 
   <ion-row class="itemRow">
     <ion-col class="itemTitle">Insumos:</ion-col>
-    <ion-col>
+    <ion-col size="8">
       <ion-row *ngFor="let item of insumos">
-        • {{item.name}}
+        • {{item.name}} ({{item.quantity}} {{item.unit}})
       </ion-row>
     </ion-col>
   </ion-row>
 
-  <ion-row>
-    <ion-col class="buttonsCol">
+  <ion-row class="buttonsRow">
+    <ion-col class="buttonsCol" *ngIf="insumosCollection.length > 0">
       <ion-button color="danger" class="button" (click)="presentAlertConfirm()">Eliminar</ion-button>&nbsp;
-      <ion-button class="button" (click)="presentModalEditProduct()">Editar</ion-button>
+      <ion-button class="button" (click)="presentModalEditProduct(); dismissModal();">Editar</ion-button>
     </ion-col>
   </ion-row>
 

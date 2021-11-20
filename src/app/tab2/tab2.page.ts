@@ -25,6 +25,8 @@ export class Tab2Page implements OnInit {
   category: string;
   price: number;
   insumos: any;
+  textToSearch = '';
+  keyToFilter = 'name';
 
   ngOnInit() {
     this.firestoreService.getProductsCollection<Producto>('Productos/').subscribe(response => {
@@ -68,6 +70,15 @@ export class Tab2Page implements OnInit {
     this.category = product.category;
     this.price = product.price;
     this.insumos = product.insumos;
+  }
+
+  search(event) {
+    this.textToSearch = event.detail.value;    
+  }
+
+  filterByValue(value: string, key: string) {
+    this.keyToFilter = key;
+    this.textToSearch = value;
   }
 
 }

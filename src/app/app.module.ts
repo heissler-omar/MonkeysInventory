@@ -12,6 +12,7 @@ import { ComponentsModule } from './Components/components.module';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore'; 
 import { environment } from 'src/environments/environment';
+import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +24,8 @@ import { environment } from 'src/environments/environment';
     ComponentsModule,
     NgMultiSelectDropDownModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    PipesModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

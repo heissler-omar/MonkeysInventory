@@ -46,6 +46,9 @@ export class FirestoreService {
   deleteProduct(path: string, id: string) {
     return this.db.collection(path).doc(id).delete();
   }
+  updateProduct(data: any, path: string, id: string) {
+    return this.db.collection(path).doc(id).update(data);
+  }
   
   
 

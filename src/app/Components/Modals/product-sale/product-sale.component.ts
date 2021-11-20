@@ -36,13 +36,11 @@ export class ProductSaleComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.insumos);
     for(let item in this.insumos){
       this.firestoreService.getInsumo('Insumos/', this.insumos[item].id).subscribe(response => {
         let res = response;
         this.originalInsumos.push(res);
       })
-      console.log('Originales: ', this.originalInsumos);
     }
 
   }
@@ -88,16 +86,8 @@ export class ProductSaleComponent implements OnInit {
     await alert.present();
   }
 
-  ngDocheck(){
-    console.log(this.insumo)
-  }
-
-  insumo= [];
 
   sellProduct() {
-    console.log('Insumos: ', this.insumos);
-    
-    console.log('Original: ',this.originalInsumos);
     /* Se están eliminando objetos con id duplicada en el array originalInsumos */
     const obj = {};
 
@@ -110,32 +100,41 @@ export class ProductSaleComponent implements OnInit {
     for(let key in obj) {
       originInsumos.push(obj[key]);
     }
-
-    console.log('Sin duplicados: ',originInsumos);
     /* ------------------------------------------------------------------------ */
 
+    let flag: number = 1;
 
     for(let item in this.insumos) {
       let quantityToSub = (this.insumos[item].quantity) * this.number;
       originInsumos[item].quantity = originInsumos[item].quantity - quantityToSub;
-      this.firestoreService.updateInsumo(originInsumos[item], 'Insumos/', originInsumos[item].id)
+      console.log('cantidad: ',originInsumos[item].quantity)
+      if (originInsumos[item].quantity >= 0) {
+        console.log('hay insumos');
+        flag = flag + 1;
+        
+      } else if (originInsumos[item].quantity < 0) {
+        console.log('no hay insumos');
+        flag = flag * 0;
+      }
+      this.firestoreService.updateInsumo(originInsumos[item], 'Insumos/', originInsumos[item].id);
     }
 
-    console.log('Array con restas: ', originInsumos);
+    if (flag >= 1) {
+      this.newSale.date = new Date().toLocaleString();
+      this.newSale.product = this.name;
+      this.newSale.quantity = this.number;
+      this.newSale.price = this.price * this.number;
 
+      this.firestoreService.createSale(this.newSale, 'Ventas/', this.newSale.id).then(response => {
+        this.presentToast('La venta se ha realizado satisfactoriamente.');
+        this.dismissModal();
+      });
 
-    this.newSale.date = new Date().toLocaleString();;
-    this.newSale.product = this.name;
-    this.newSale.quantity = this.number;
-    this.newSale.price = this.price * this.number;
+    } else if (flag == 0) {
+      this.presentAlert();
+    }
 
-    console.log(this.newSale);
     
-
-    this.firestoreService.createSale(this.newSale, 'Ventas/', this.newSale.id).then(response => {
-      this.presentToast('Venta satisfactoria.');
-      this.dismissModal();
-    })
     
   }
 
@@ -145,6 +144,20 @@ export class ProductSaleComponent implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Alerta',
+      message: 'No existen suficientes insumos para realizar la venta.',
+      buttons: ['Aceptar']
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
   }
 
 }

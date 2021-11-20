@@ -8,6 +8,9 @@ import { AlertController } from '@ionic/angular';
 import { DetailInsumoComponent } from '../Components/Modals/detail-insumo/detail-insumo.component';
 import { FirestoreService } from '../Services/firestore.service';
 import { Insumo } from 'src/app/Models/insumos.interface';
+import { Workbook } from 'exceljs';
+import * as fs from 'file-saver';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-tab1',
@@ -31,6 +34,7 @@ export class Tab1Page implements OnInit {
   isAssigned: boolean;
   assignments: number;
   status: string;
+  textoBuscar = '';
 
   ngOnInit() {
     this.getInsumos();
@@ -98,6 +102,7 @@ export class Tab1Page implements OnInit {
           text: 'Aceptar',
           handler: () => {
             console.log('Confirm Okay');
+            this.downloadExcel();
           }
         }
       ]
@@ -120,8 +125,7 @@ export class Tab1Page implements OnInit {
         this.status = 'with data';
       }
 
-      console.log('Estatus: ',this.status)
-    console.log(this.insumos.length)
+      console.log(this.insumos)
 
     });
     
@@ -136,7 +140,43 @@ export class Tab1Page implements OnInit {
     this.assignments = insumo.assignments;
   }
 
-  
+  buscar(event) {
+    this.textoBuscar = event.detail.value;    
+  }
+
+  downloadExcel() {
+    //create new excel work book
+    let workbook = new Workbook();
+    //add name to sheet
+    let worksheet = workbook.addWorksheet("Inventario de insumos");
+    //add column name
+
+    worksheet.columns = [
+      {width: 16}
+    ]
+
+    let header = ["Nombre", "Cantidad", "U. Medida"]
+    let headerRow = worksheet.addRow(header);
+
+    headerRow.font = {
+      bold: true
+    }
+
+    for (let item of this.insumos) {
+      let temp = [];
+      temp.push(item.name, item.quantity, item.unit)
+      worksheet.addRow(temp)
+    }
+
+    //set downloadable file name
+    let fname = "Inventario de insumos"
+
+    //add data and file name and download
+    workbook.xlsx.writeBuffer().then((data) => {
+      let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      fs.saveAs(blob, fname + ' ' + moment(new Date()).format('DD-MM-YYYY') + '.xlsx');
+    });
+  }
 
 
 }

@@ -1,13 +1,15 @@
 <ion-grid>
   <ion-row class="titleRow">
-    <ion-col size="5" class="titleItem">Nombre</ion-col>
-    <ion-col size="3" class="titleItem2">Cantidad</ion-col>
-    <ion-col size="4" class="titleItem2">U. medida</ion-col>
+    <ion-col class="titleItem">Nombre</ion-col>
+    <ion-col class="titleItem2">Cantidad</ion-col>
+    <ion-col class="titleItem2">Unidad</ion-col>
+    <ion-col class="titleItem2">Asignado</ion-col>
   </ion-row>
   <ion-row class="titleRow">
-    <ion-col size="5">{{name}}</ion-col>
-    <ion-col size="3" class="item2">{{quantity}}</ion-col>
-    <ion-col size="4" class="item2">{{unit}}</ion-col>
+    <ion-col>{{name}}</ion-col>
+    <ion-col class="item2">{{quantity.toFixed(2)}}</ion-col>
+    <ion-col class="item2">{{unit}}</ion-col>
+    <ion-col class="item2">{{status}}</ion-col>
   </ion-row>
   <ion-row class="buttonRow">
     <ion-button color="danger" class="editButton" (click)="dismiss(); presentAlertConfirm()">Eliminar</ion-button> &nbsp;

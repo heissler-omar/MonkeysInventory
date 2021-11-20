@@ -17,39 +17,9 @@
     </tr>
     <tr *ngFor="let insumo of insumos">
       <td>{{insumo.name}}</td>
-      <td>{{insumo.quantity}}</td>
+      <td>{{insumo.quantity.toFixed(2)}}</td>
       <td>{{insumo.unit}}</td>
     </tr>
-    <!-- <tr>
-      <td>Leche</td>
-      <td>55</td>
-      <td>Libras</td>
-    </tr>
-    <tr>
-      <td>Leche espumada</td>
-      <td>60</td>
-      <td>Libras</td>
-    </tr>
-    <tr>
-      <td>Espresso</td>
-      <td>50</td>
-      <td>Libras</td>
-    </tr>
-    <tr>
-      <td>Chai</td>
-      <td>50</td>
-      <td>Libras</td>
-    </tr>
-    <tr>
-      <td>Azucar</td>
-      <td>50</td>
-      <td>Libras</td>
-    </tr>
-    <tr>
-      <td>Jarabe</td>
-      <td>50</td>
-      <td>Libras</td>
-    </tr> -->
   </table>
   
 </ion-content>
